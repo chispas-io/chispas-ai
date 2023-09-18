@@ -1,10 +1,39 @@
 #!/bin/bash
 
-sudo apt-get install -y \
-  python3-pip \
-  python3-setuptools \
-  shellcheck
+# Detect the Operating System
+OS="$(uname -s)"
 
-pip install pipenv
+# Detect if Mac is ARM based (M1)
+if [[ "$OS" == "Darwin" ]]; then
+  ARCH="$(uname -m)"
+  if [[ "$ARCH" == "arm64" ]]; then
+    echo "Running on a Mac M1 chip."
+    # Add your M1-specific installation steps here
+    # brew install python3
+    pip3 install pipenv
+    pipenv install --dev
+    exit 0
+  else
+    echo "Running on a non-M1 Mac."
+    # Add your non-M1 Mac-specific installation steps here
+    # brew install python3
+    pip3 install pipenv
+    pipenv install --dev
+    exit 0
+  fi
+elif [[ "$OS" == "Linux" ]]; then
+  echo "Running on Linux."
+  # Add your Linux-specific installation steps here
+  sudo apt-get update
+  sudo apt-get install -y \
+    python3-pip \
+    python3-setuptools \
+    shellcheck
 
-pipenv install --dev
+  pip3 install pipenv
+  pipenv install --dev
+  exit 0
+else
+  echo "Unsupported operating system."
+  exit 1
+fi
