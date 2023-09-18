@@ -1,6 +1,6 @@
 import openai
 
-def analyze_themes_with_chatgpt(unknown_words, learning_language="spanish"):
+def analyze_themes_with_chatgpt(unknown_words, learning_language="spanish", known_language="english"):
     # Convert the list of unknown words into a string, separated by commas
     unknown_words_str = ', '.join(unknown_words)
     
