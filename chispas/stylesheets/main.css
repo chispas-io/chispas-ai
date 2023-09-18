@@ -1,0 +1,99 @@
+body {
+  background-color: #90ee90;
+  padding: 20px;
+}
+
+header {
+  margin: 0 0 20px;
+}
+
+h1 {
+  font-size: 32px;
+}
+
+h2 {
+  font-size: 26px;
+}
+
+hr {
+  border-bottom: 0;
+  border-top: 2px;
+  box-sizing: border-box;
+  height: 0;
+  width: 100%;
+}
+
+input {
+  background-color: #fff;
+  border: 1px solid #000;
+  border-radius: 0;
+  color: #000;
+  padding: 4px;
+}
+
+button {
+  background-color: #fff;
+  color: #000;
+  padding: 4px;
+  max-width: 200px;
+}
+
+.flash-messages {
+  border: 1px solid #000;
+  border-bottom-width: 0;
+  box-sizing: border-box;
+  display: inline-block;
+  font-weight: 600;
+  margin: 10px;
+}
+
+.flash-message {
+  background-color: #000;
+  border-bottom: 1px solid #000;
+  box-sizing: border-box;
+  color: #fff;
+  display: inline-block;
+  margin: 0;
+  padding: 5px 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.flash-error {
+  background-color: #32cd32;
+  border-bottom: 1px solid #000;
+  box-sizing: border-box;
+  color: #fff;
+  display: inline-block;
+  margin: 0;
+  padding: 5px 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.login-section {
+  margin: 0 auto;
+  max-width: 300px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+}
+
+input + input {
+  margin-top: 16px;
+}
+
+.difficult-words-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.large-text-input {
+  margin: 20px 0;
+}
+
+.submit-button {
+  max-width: 200px;
+}

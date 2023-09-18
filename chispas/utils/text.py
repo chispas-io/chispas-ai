@@ -9,7 +9,7 @@ def display_random_text_block(filename='input_text.txt'):
     random_block = random.choice(text_blocks).strip()
 
     # Display the randomly chosen block of text to the user
-    print(f"Here is a random block of text:\n{random_block}")
+    #  print(f"Here is a random block of text:\n{random_block}")
 
     return random_block
 
@@ -19,6 +19,6 @@ def display_entire_text(filename='input_text.txt'):
         entire_text = f.read()
 
     # Display the entire text to the user
-    print(f"Here is the entire text:\n{entire_text}")
+    #  print(f"Here is the entire text:\n{entire_text}")
 
     return entire_text

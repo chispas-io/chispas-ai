@@ -2,8 +2,8 @@ import sqlite3
 
 def initialize_database():
     # Connect to SQLite database (it will create a file if it doesn't exist)
-    conn = sqlite3.connect('language_learning_app.db')
-    
+    conn = get_db_connection()
+
     # Create a cursor object to execute SQL queries
     c = conn.cursor()
 
@@ -26,20 +26,26 @@ def initialize_database():
     conn.commit()
     conn.close()
 
-# # Initialize the database by running the function
-# initialize_database()
-
-
 def store_unknown_words(user_id, unknown_words):
     # Connect to SQLite database
-    conn = sqlite3.connect('language_learning_app.db')
-    
+    conn = get_db_connection()
+
     # Create a cursor object to execute SQL queries
     c = conn.cursor()
 
     # Store the unknown words in the database
-    for word in unknown_words:
-        c.execute("INSERT INTO unknown_words (user_id, word) VALUES (?, ?)", (user_id, word))
+    for word in unknown_words.split():
+        c.execute('INSERT INTO unknown_words (user_id, word) VALUES (?, ?)', (user_id, word))
 
     # Commit the changes and close the connection
     conn.commit()
+
+def get_unknown_words(user_id):
+    conn = get_db_connection()
+    unknown_words = conn.execute('SELECT word FROM unknown_words WHERE user_id = :user_id', { 'user_id': user_id }).fetchall()
+    conn.close()
+    return (list(zip(*unknown_words))[0])
+
+def get_db_connection():
+    conn = sqlite3.connect('language_learning_app.db')
+    return conn

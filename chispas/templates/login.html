@@ -1,0 +1,14 @@
+{% include "head.html" %}
+<body>
+  {% include "header.html" %}
+  <main>
+    <section class="login-section">
+      <h2>Login</h2>
+      <form class="login-form" method="post">
+        <input name="username" placeholder="username" value="{{ request.form.username }}" autocomplete="username" type="text" autofocus="true">
+        <input name="password" placeholder="password" value="{{ request.form.password }}" autocomplete="current-password" type="password">
+        <input type="submit" value="Submit">
+      </form>
+    </section>
+  </main>
+</body>

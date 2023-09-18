@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set -eou pipefail
+
+FILES=$(grep -rl '^#!/.*bash')
+
+EXIT_CODE=0
+for file in $FILES; do
+  shellcheck "$file" || EXIT_CODE=1
+done
+
+exit $EXIT_CODE

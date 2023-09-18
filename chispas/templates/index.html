@@ -1,0 +1,63 @@
+{% include "head.html" %}
+<body>
+  {% include "header.html" %}
+  <script>
+    function addDifficultWord(evt) {
+      evt.target.style="font-weight:bold;"
+      const word = event.target.innerText;
+      const inputEl = document.getElementById("difficult-words-input");
+      inputEl.value = inputEl.value + " " + word;
+    }
+  </script>
+  <main>
+    <div>
+      User: {{ session['username'] }}
+    </div>
+    <section class="difficult-words-section">
+      <h2>Difficult words lesson module</h2>
+      <hr />
+      <div>
+        <b>Sample text:</b>
+        <br>
+        Select which words are difficult. Click each word you would like to add.
+        <br>
+        <br>
+        <div class="sample-text">
+          {% for word in random_text.split() %}
+          <span onClick="addDifficultWord(event)">{{ word }}</span>
+          {% endfor %}
+        </div>
+
+        <hr>
+        <b>Difficult words:</b>
+
+        <div class="difficult-words-list">
+          Previously difficult words:
+          {{ difficult_words }}
+        </div>
+
+        <br>
+        <form action="{{ url_for('difficult_words') }}" class="difficult-words-form" method="post">
+          <textarea class="large-text-input" id="difficult-words-input" name="difficult_words">{{ difficult_words }}</textarea>
+          <button class="submit-button" type="submit">Submit new difficult words</button>
+        </form>
+
+        <hr>
+        <b>Common themes:</b>
+        <div class="analyzed-themes">{{ themes }}</div>
+
+        <hr>
+        <b>Detailed explanations:</b>
+        <div class="theme-details">{{ theme_details }}</div>
+
+        <hr>
+        <b>New example paragraph:</b>
+        <div class="generated-paragraph">{{ new_example }}</div>
+
+        <hr>
+        <b>Progressive text:</b>
+        <div class="generated-paragraph">{{ progressive_text }}</div>
+      </div>
+    </section>
+  </main>
+</body>

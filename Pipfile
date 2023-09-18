@@ -4,9 +4,19 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+click = "*"
+flask = "*"
+flask-cors = "*"
 openai = "*"
+pyjwt = "*"
+pylint = "*"
+pylint-quotes = "*"
+python-dotenv = "*"
 
 [dev-packages]
+pytest = "*"
 
-[requires]
-python_version = "3.8"
+[scripts]
+cli = "python -m cli"
+tests = "python -m pytest"
+lints = "pylint chispas tests"
