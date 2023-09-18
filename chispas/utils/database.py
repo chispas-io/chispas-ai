@@ -44,7 +44,11 @@ def get_unknown_words(user_id):
     conn = get_db_connection()
     unknown_words = conn.execute('SELECT word FROM unknown_words WHERE user_id = :user_id', { 'user_id': user_id }).fetchall()
     conn.close()
-    return (list(zip(*unknown_words))[0])
+    
+    if not unknown_words:
+        return []
+    
+    return list(zip(*unknown_words))[0]
 
 def get_db_connection():
     conn = sqlite3.connect('language_learning_app.db')
