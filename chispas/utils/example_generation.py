@@ -9,7 +9,7 @@ def generate_new_examples(unknown_words, themes, learning_language="spanish", kn
         I have now learned more about what these words mean and would like to test my
         knowledge. 
         
-        Generate a new example paragraph in {learning_language} so that I can test if I have improved in learning the words. 
+        Generate a new example paragraph. Ensure it is written in {learning_language} so that I can test if I have improved in learning the words. 
         Then add a newline and a translated version of the {learning_language} paragraph in {known_language} so that I can check my understanding.
     """
     for word in unknown_words:
