@@ -32,9 +32,12 @@ def store_unknown_words(user_id, unknown_words):
 
     # Create a cursor object to execute SQL queries
     c = conn.cursor()
+    
+    # Split by comma and strip the leading and trailing spaces and double quotes
+    split_words_and_phrases = [word.strip().strip('"') for word in unknown_words.split(",")]
 
     # Store the unknown words in the database
-    for word in unknown_words.split():
+    for word in split_words_and_phrases:
         c.execute('INSERT INTO unknown_words (user_id, word) VALUES (?, ?)', (user_id, word))
 
     # Commit the changes and close the connection
@@ -48,7 +51,15 @@ def get_unknown_words(user_id):
     if not unknown_words:
         return []
     
-    return list(zip(*unknown_words))[0]
+    print(f"get_unknown_words() unknown_words: {unknown_words}")
+
+    # Unzip the list of one-element tuples into a list
+    unquoted_words = list(zip(*unknown_words))[0]
+
+    # Add quotes around each word
+    quoted_words = [f'"{word}"' for word in unquoted_words]
+
+    return quoted_words
 
 def get_db_connection():
     conn = sqlite3.connect('language_learning_app.db')
