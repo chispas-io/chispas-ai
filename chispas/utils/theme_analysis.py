@@ -1,9 +1,16 @@
 from .open_ai import get_response
 
-def analyze_themes_with_chatgpt(unknown_words, learning_language="spanish", known_language="english"):
+
+def analyze_themes_with_chatgpt(
+    unknown_words, learning_language="spanish", known_language="english"
+):
+    # Check if the list of unknown words is empty
+    if not unknown_words:
+        return "No unknown words found. You're doing great!"
+
     # Convert the list of unknown words into a string, separated by commas
-    unknown_words_str = ', '.join(unknown_words)
-    
+    unknown_words_str = ", ".join(unknown_words)
+
     # Prepare the prompt for ChatGPT
     prompt = f"""
       I am a native {known_language} speaker who is learning {learning_language}.
