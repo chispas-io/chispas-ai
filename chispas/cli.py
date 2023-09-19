@@ -1,6 +1,6 @@
 import os
 import click
-from chispas.utils.database import initialize_database
+from chispas.utils.database import initialize_database, erase_unknown_words_table
 
 @click.group()
 def cli():
@@ -10,6 +10,7 @@ def cli():
 def init_db():
     """Clear the existing data and create new tables."""
     initialize_database()
+    erase_unknown_words_table()
     click.echo('Initialized the database.')
 
 @cli.command()

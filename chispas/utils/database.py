@@ -53,3 +53,18 @@ def get_unknown_words(user_id):
 def get_db_connection():
     conn = sqlite3.connect('language_learning_app.db')
     return conn
+
+
+def erase_unknown_words_table():
+    # Connect to SQLite database
+    conn = get_db_connection()
+
+    # Create a cursor object to execute SQL queries
+    c = conn.cursor()
+
+    # Execute SQL query to delete all entries from the unknown_words table
+    c.execute('DELETE FROM unknown_words')
+
+    # Commit the changes and close the connection
+    conn.commit()
+    conn.close()
