@@ -1,10 +1,17 @@
 import openai
 
-def generate_new_examples(unknown_words, themes):
+def generate_new_examples(unknown_words, themes, learning_language="spanish", known_language="english"):
     # Create a prompt for ChatGPT to generate new example sentences or paragraphs
-    learning_language = "spanish"
-    known_language = "english"
-    prompt = f"Generate a new example paragraph in {learning_language} that incorporates the following {learning_language} words, taking into account that I'm trying to get better in the themes of {themes}. Also provide the translated version in {known_language}:\n"
+    prompt = f"""
+        I am a native {known_language} speaker who is learning {learning_language}.
+
+        I was given a block of text and identified the following common themes {themes} in the words that I didn't understand: {unknown_words}. 
+        I have now learned more about what these words mean and would like to test my
+        knowledge. 
+        
+        Generate a new example paragraph in {learning_language} so that I can test if I have improved in learning the words. 
+        Then add a newline and a translated version of the {learning_language} paragraph in {known_language}:
+    """
     for word in unknown_words:
         prompt += f"- {word}\n"
 
