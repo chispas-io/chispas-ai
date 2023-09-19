@@ -1,4 +1,4 @@
-import openai
+from .open_ai import get_response
 
 
 def generate_detailed_explanations(
@@ -24,11 +24,4 @@ def generate_detailed_explanations(
     """
 
     # Call ChatGPT to generate the explanations
-    response = openai.Completion.create(
-        engine="text-davinci-002", prompt=prompt, max_tokens=500
-    )
-
-    # Extract and return the generated text as the detailed explanations
-    explanations = response.choices[0].text.strip()
-
-    return explanations
+    return get_response(prompt, max_tokens=500)
