@@ -1,5 +1,7 @@
 # ✨ Chispas
+
 ## Overview
+
 The Language Learning App aims to provide an interactive and adaptive learning experience for individuals looking to improve their language skills. Utilizing OpenAI's ChatGPT for linguistic analysis and tailored educational content, the application offers a multi-faceted approach to language learning.
 
 ## Core Features:
@@ -15,8 +17,6 @@ The Language Learning App aims to provide an interactive and adaptive learning e
 This process will then, theoretically, be applied recursively to progressively teach people a langue in chunks that are related to each other. 
 
 [![CI](https://github.com/chispas-io/chispas-ai/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/chispas-io/chispas-ai/actions/workflows/ci.yml)
-
-Language learning with an AI tutor.
 
 ## Setup
 
