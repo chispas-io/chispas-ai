@@ -1,4 +1,4 @@
-import openai
+from .open_ai import get_response
 
 def generate_detailed_explanations(unknown_words, themes):
     # Create a prompt for ChatGPT that asks for explanations and examples for each unknown word
@@ -9,13 +9,4 @@ def generate_detailed_explanations(unknown_words, themes):
         prompt += f"- {word}\n"
 
     # Call ChatGPT to generate the explanations
-    response = openai.Completion.create(
-      engine="text-davinci-002",
-      prompt=prompt,
-      max_tokens=500
-    )
-
-    # Extract and return the generated text as the detailed explanations
-    explanations = response.choices[0].text.strip()
-
-    return explanations
+    return get_response(prompt, max_tokens=500)

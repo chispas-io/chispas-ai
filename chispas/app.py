@@ -1,4 +1,3 @@
-import openai
 import os
 import requests
 from flask import (
@@ -38,7 +37,7 @@ def create_app():
     app.config['SECRET_KEY'] = create_secret_key()
     CORS(app)
 
-    set_api_key(openai)
+    set_api_key()
 
     initialize_database()
 
@@ -67,16 +66,10 @@ def create_app():
         theme_details = generate_detailed_explanations(initial_difficult_words, themes)
 
         # Generate a new example paragraph incorporating the unknown words
-        try:
-            new_example = generate_new_examples(initial_difficult_words, themes)
-        except openai.error.RateLimitError as e:
-            new_example = "Rate limited."
+        new_example = generate_new_examples(initial_difficult_words, themes)
 
         # Generate a new text block for the next learning cycle
-        try:
-            progressive_text = generate_progression_text_block(initial_difficult_words, themes, "beginner")
-        except openai.error.RateLimitError as e:
-            progressive_text = "Rate limited."
+        progressive_text = generate_progression_text_block(initial_difficult_words, themes, "beginner")
 
         return render_template('index.html', random_text=random_text, difficult_words=difficult_words, themes=themes, theme_details=theme_details, new_example=new_example, progressive_text=progressive_text)
 

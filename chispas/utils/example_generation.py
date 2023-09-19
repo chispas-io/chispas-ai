@@ -1,4 +1,4 @@
-import openai
+from .open_ai import get_response
 
 def generate_new_examples(unknown_words, themes):
     # Create a prompt for ChatGPT to generate new example sentences or paragraphs
@@ -9,17 +9,7 @@ def generate_new_examples(unknown_words, themes):
         prompt += f"- {word}\n"
 
     # Use the GPT-3 API to generate the example
-    response = openai.Completion.create(
-        engine="text-davinci-002",
-        prompt=prompt,
-        max_tokens=150
-    )
-
-    # Extract and return the generated text as the new example
-    new_example = response.choices[0].text.strip()
-
-    return new_example
-
+    return get_response(prompt, max_tokens=150)
 
 def generate_progression_text_block(learned_words, themes, difficulty_level):
     # Formulate the prompt for ChatGPT
@@ -30,13 +20,4 @@ def generate_progression_text_block(learned_words, themes, difficulty_level):
     prompt += f"The text should be related to the themes of {', '.join(themes)}."
 
     # Use GPT-3 API to generate the new text block
-    response = openai.Completion.create(
-        engine="text-davinci-002",
-        prompt=prompt,
-        max_tokens=150
-    )
-
-    # Extract and return the generated text as the new text block
-    new_text_block = response.choices[0].text.strip()
-
-    return new_text_block
+    return get_response(prompt, max_tokens=150)
