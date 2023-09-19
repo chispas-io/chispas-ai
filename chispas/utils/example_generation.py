@@ -54,7 +54,7 @@ def generate_progression_text_block(learned_words, themes, difficulty_level, lea
     response = openai.Completion.create(
         engine="text-davinci-002",
         prompt=prompt,
-        max_tokens=150
+        max_tokens=250
     )
 
     # Extract and return the generated text as the new text block
