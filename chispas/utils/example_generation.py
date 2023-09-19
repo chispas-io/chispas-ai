@@ -10,7 +10,7 @@ def generate_new_examples(unknown_words, themes, learning_language="spanish", kn
         knowledge. 
         
         Generate a new example paragraph in {learning_language} so that I can test if I have improved in learning the words. 
-        Then add a newline and a translated version of the {learning_language} paragraph in {known_language}:
+        Then add a newline and a translated version of the {learning_language} paragraph in {known_language} so that I can check my understanding.
     """
     for word in unknown_words:
         prompt += f"- {word}\n"

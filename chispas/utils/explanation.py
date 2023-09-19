@@ -22,8 +22,6 @@ def generate_detailed_explanations(
 
       Here is the list of words: {', '.join(unknown_words)}
     """
-    for word in unknown_words:
-        prompt += f"- {word}\n"
 
     # Call ChatGPT to generate the explanations
     response = openai.Completion.create(
