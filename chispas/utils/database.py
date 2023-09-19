@@ -51,7 +51,6 @@ def get_unknown_words(user_id):
     if not unknown_words:
         return []
     
-    print(f"get_unknown_words() unknown_words: {unknown_words}")
 
     # Unzip the list of one-element tuples into a list
     unquoted_words = list(zip(*unknown_words))[0]
