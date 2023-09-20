@@ -5,13 +5,12 @@ on:
   workflow_dispatch:
   push:
 jobs:
-  integrity_checks:
-    name: Integrity Checks
+  server_integrity_checks:
+    name: Server integrity checks
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
       - run: scripts/setup
-      - run: pipenv run tests
+      - run: pipenv run test
+      - run: pipenv run lint
       - run: scripts/lint

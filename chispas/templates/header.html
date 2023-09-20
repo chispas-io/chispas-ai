@@ -1,4 +1,12 @@
 <header>
   <h1>✨ Chispas</h1>
-  {% include "flash_messages.html" %}
+  <div>
+    {% include "flash_messages.html" %}
+    {% if current_user.is_authenticated %}
+    <br>
+    <form action="/logout" method="POST">
+      <input type="submit" value="Logout">
+    </form>
+    {% endif %}
+  </div>
 </header>

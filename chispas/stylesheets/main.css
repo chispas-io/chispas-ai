@@ -60,7 +60,7 @@ button {
 }
 
 .flash-error {
-  background-color: #32cd32;
+  background-color: #f00;
   border-bottom: 1px solid #000;
   box-sizing: border-box;
   color: #fff;
