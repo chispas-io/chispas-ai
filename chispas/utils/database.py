@@ -11,6 +11,7 @@ def initialize_database():
     c.execute('''CREATE TABLE IF NOT EXISTS users (
                     user_id INTEGER PRIMARY KEY AUTOINCREMENT,
                     username TEXT NOT NULL,
+                    encrypted_password TEXT NOT NULL,
                     native_language TEXT NOT NULL
                 );''')
 
@@ -32,7 +33,7 @@ def store_unknown_words(user_id, unknown_words):
 
     # Create a cursor object to execute SQL queries
     c = conn.cursor()
-    
+
     # Split by comma and strip the leading and trailing spaces and double quotes
     split_words_and_phrases = [word.strip().strip('"') for word in unknown_words.split(",")]
 
@@ -47,10 +48,9 @@ def get_unknown_words(user_id):
     conn = get_db_connection()
     unknown_words = conn.execute('SELECT word FROM unknown_words WHERE user_id = :user_id', { 'user_id': user_id }).fetchall()
     conn.close()
-    
+
     if not unknown_words:
         return []
-    
 
     # Unzip the list of one-element tuples into a list
     unquoted_words = list(zip(*unknown_words))[0]
@@ -61,9 +61,7 @@ def get_unknown_words(user_id):
     return quoted_words
 
 def get_db_connection():
-    conn = sqlite3.connect('language_learning_app.db')
-    return conn
-
+    return sqlite3.connect('language_learning_app.db')
 
 def erase_unknown_words_table():
     # Connect to SQLite database

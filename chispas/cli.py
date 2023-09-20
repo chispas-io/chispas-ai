@@ -16,4 +16,4 @@ def init_db():
 @cli.command()
 def serve():
     """Run the app."""
-    os.system('FLASK_APP=chispas flask run')
+    os.system('FLASK_APP=chispas flask run --debug')

@@ -33,17 +33,18 @@ cp .env.example .env
 vim .env
 ```
 
-Initialize the db and run the app
+Use the cli to run the app
 
 ```bash
-pipenv run cli init-db
 pipenv run cli serve
 ```
+
+Can reset words table with `pipenv run cli init-db`.
 
 Then visit http://localhost:5000/.
 
 ## Test
 
 ```bash
-pipenv run tests
+pipenv run test
 ```

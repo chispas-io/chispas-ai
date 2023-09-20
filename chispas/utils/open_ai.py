@@ -20,7 +20,7 @@ def handle_openai_ratelimit_error(f) -> str:
         try:
             return f(*args, **kwargs)
         except openai.error.RateLimitError as e:
-            flash('Rate limited')
+            flash('Rate limited', 'error')
             return 'Rate limited'
 
     return decorated
