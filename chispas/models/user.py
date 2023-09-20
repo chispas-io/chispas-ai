@@ -33,7 +33,7 @@ class User(UserMixin):
             return False
 
         try:
-            decoded_password = decode_token(app, user.encrypted_password)
+            decoded_password = decode_token(user.encrypted_password)
             if password == decoded_password:
                 flash(f'Hello, {user.username}!')
                 return user

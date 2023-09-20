@@ -6,7 +6,7 @@ from functools import wraps
 DEFAULT_MAX_TOKENS = 100
 DEFAULT_ENGINE = 'text-davinci-002'
 
-def set_api_key() -> None:
+def initialize_openai() -> None:
     openai.api_key = os.environ.get("OPENAI_API_KEY")
 
 def handle_openai_ratelimit_error(f) -> str:

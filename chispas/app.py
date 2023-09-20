@@ -23,13 +23,13 @@ from .utils.database import (
     store_unknown_words,
     get_unknown_words,
 )
-from .utils.open_ai import set_api_key
+from .utils.open_ai import initialize_openai
 from .utils.example_generation import (
     generate_new_examples,
     generate_progression_text_block,
 )
 from .utils.explanation import generate_detailed_explanations
-from .utils.sessions import create_secret_key, encode_token
+from .utils.sessions import find_or_create_secret_key, encode_token
 from .utils.text import display_entire_text
 from .utils.theme_analysis import analyze_themes_with_chatgpt
 
@@ -40,16 +40,9 @@ KNOWN_LANGUAGE="english"
 def initialize_app():
     app = Flask(__name__)
 
-    dev_mode = True
-    if dev_mode:
-        app.config['SECRET_KEY'] = 'jinx'
-    else:
-        app.config['SECRET_KEY'] = create_secret_key()
+    app.config['SECRET_KEY'] = find_or_create_secret_key()
 
     CORS(app)
-
-    set_api_key()
-    initialize_database()
 
     return app
 
@@ -64,6 +57,9 @@ def create_app(): # pylint: disable=too-many-locals
 
     app = initialize_app()
     login_manager = initialize_login_manager(app)
+
+    initialize_openai()
+    initialize_database()
 
     @app.route('/', methods=['GET'])
     @login_required
@@ -163,7 +159,7 @@ def create_app(): # pylint: disable=too-many-locals
         username = request.form['username']
         password = request.form['password']
 
-        encrypted_password = encode_token(app, password)
+        encrypted_password = encode_token(password)
 
         user = User(username, encrypted_password, "en")
         user.save()

@@ -1,6 +1,12 @@
 import datetime
+import os
+
+from dotenv.cli import enumerate_env
+from dotenv.main import set_key
 from jwt import decode, encode
 from secrets import token_urlsafe
+from logging import error
+from flask import current_app
 
 def create_secret_key():
     """
@@ -11,7 +17,16 @@ def create_secret_key():
 
     return token_urlsafe(64)
 
-def encode_token(app, subject):
+def find_or_create_secret_key():
+    secret_key = os.environ.get("SECRET_KEY")
+
+    if not secret_key:
+        error('SECRET_KEY not set. Add this to your .env file.')
+        secret_key = create_secret_key()
+
+    return secret_key
+
+def encode_token(subject) -> str:
     '''
     encode subject as JWT using secret key
 
@@ -27,11 +42,11 @@ def encode_token(app, subject):
 
     return encode(
         payload,
-        app.config.get('SECRET_KEY'),
+        os.environ.get("SECRET_KEY"),
         algorithm='HS256',
     )
 
-def decode_token(app, subject):
+def decode_token(subject) -> str:
     '''
     decode JWT subject using secret key
 
@@ -40,8 +55,13 @@ def decode_token(app, subject):
 
     decoded_payload = decode(
         subject,
-        app.config.get('SECRET_KEY'),
+        os.environ.get("SECRET_KEY"),
         algorithms=['HS256'],
     )
 
     return decoded_payload.get('sub')
+
+def generate_secret_key() -> str:
+    new_key = create_secret_key()
+    set_key(enumerate_env(), "SECRET_KEY", new_key)
+    return new_key
