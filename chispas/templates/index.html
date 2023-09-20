@@ -3,11 +3,42 @@
   {% include "header.html" %}
   <script>
     function addDifficultWord(evt) {
-      evt.target.style="font-weight:bold;"
-      const word = event.target.innerText;
+      evt.target.style = "font-weight:bold;";
+      const word = evt.target.innerText;
       const inputEl = document.getElementById("difficult-words-input");
-      inputEl.value = inputEl.value + " " + word;
+      const existingWords = inputEl.value ? inputEl.value.split(", ") : [];
+
+      // If there are existing words, append the new word with a ", " prefix.
+      // Otherwise, just set it as the new word.
+      const newWord = existingWords.length > 0 ? `, "${word}"` : `"${word}"`;
+
+      // Append the new word to the textarea
+      inputEl.value += newWord;
     }
+    
+    function validateInput() {
+      const inputEl = document.getElementById("difficult-words-input");
+      const words = inputEl.value.split(", ");
+
+      for (let i = 0; i < words.length; i++) {
+        let word = words[i].trim(); // Remove leading and trailing spaces
+        
+        if (!word.startsWith('"') || !word.endsWith('"')) {
+          alert("All words/phrases should be enclosed in quotes.");
+          return false; // Prevent form submission
+        }
+
+        // Check if the word is the last one; no need to look for a comma then
+        if (i !== words.length - 1) {
+          if (!inputEl.value.includes(`, `, words[i].length + i)) {
+            alert("Words/phrases should be separated by a comma followed by a single space.");
+            return false; // Prevent form submission
+          }
+        }
+      }
+      return true; // Allow form submission
+    }
+
   </script>
   <main>
     <div>
@@ -37,7 +68,7 @@
         </div>
 
         <br>
-        <form action="{{ url_for('difficult_words') }}" class="difficult-words-form" method="post">
+        <form action="{{ url_for('difficult_words') }}" class="difficult-words-form" method="post" onsubmit="return validateInput()">
           <textarea class="large-text-input" id="difficult-words-input" name="difficult_words">{{ difficult_words }}</textarea>
           <button class="submit-button" type="submit">Submit new difficult words</button>
         </form>

@@ -11,7 +11,7 @@ def generate_detailed_explanations(
       I've identified the following words and themes as challenging:
 
       Words: {', '.join(unknown_words)}
-      Themes: {', '.join(themes)}
+      Themes: {themes}
 
       Could you provide structured explanations and examples for each word in a format that's easy to understand? 
       For each word, please:
@@ -22,6 +22,8 @@ def generate_detailed_explanations(
 
       Here is the list of words: {', '.join(unknown_words)}
     """
+
+    print(f"generate_detailed_explanations() prompt:\n {prompt}")
 
     # Call ChatGPT to generate the explanations
     return get_response(prompt, max_tokens=500)
