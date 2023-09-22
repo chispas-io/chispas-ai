@@ -33,6 +33,8 @@ cp .env.example .env
 vim .env
 ```
 
+Run `pipenv run cli secret-key` to generate a new secret key.
+
 Use the cli to run the app
 
 ```bash
