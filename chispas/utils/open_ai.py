@@ -1,13 +1,13 @@
 import os
+from functools import wraps
 import openai
 from flask import flash
-from functools import wraps
 
 DEFAULT_MAX_TOKENS = 100
 DEFAULT_ENGINE = 'text-davinci-002'
 
 def initialize_openai() -> None:
-    openai.api_key = os.environ.get("OPENAI_API_KEY")
+    openai.api_key = os.environ.get('OPENAI_API_KEY')
 
 def handle_openai_ratelimit_error(f) -> str:
     '''Decorator to handle RateLimitError from OpenAI API
@@ -15,11 +15,12 @@ def handle_openai_ratelimit_error(f) -> str:
     Returns:
         AI response text or a fallback string.
     '''
+
     @wraps(f)
     def decorated(*args, **kwargs):
         try:
             return f(*args, **kwargs)
-        except openai.error.RateLimitError as e:
+        except openai.error.RateLimitError:
             flash('Rate limited', 'error')
             return 'Rate limited'
 
