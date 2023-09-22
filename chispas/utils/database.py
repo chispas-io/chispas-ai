@@ -12,7 +12,10 @@ def initialize_database():
                     user_id INTEGER PRIMARY KEY AUTOINCREMENT,
                     username TEXT NOT NULL,
                     encrypted_password TEXT NOT NULL,
-                    native_language TEXT NOT NULL
+                    authentication_token TEXT,
+                    locale TEXT,
+                    base_language TEXT,
+                    learning_language TEXT
                 );''')
 
     # Create table for unknown words
@@ -35,7 +38,7 @@ def store_unknown_words(user_id, unknown_words):
     c = conn.cursor()
 
     # Split by comma and strip the leading and trailing spaces and double quotes
-    split_words_and_phrases = [word.strip().strip('"') for word in unknown_words.split(",")]
+    split_words_and_phrases = [word.strip().strip('"') for word in unknown_words.split(',')]
 
     # Store the unknown words in the database
     for word in split_words_and_phrases:
@@ -46,7 +49,11 @@ def store_unknown_words(user_id, unknown_words):
 
 def get_unknown_words(user_id):
     conn = get_db_connection()
-    unknown_words = conn.execute('SELECT word FROM unknown_words WHERE user_id = :user_id', { 'user_id': user_id }).fetchall()
+    unknown_words = conn.execute('''
+    SELECT word
+    FROM unknown_words
+    WHERE user_id = :user_id
+    ''', { 'user_id': user_id }).fetchall()
     conn.close()
 
     if not unknown_words:

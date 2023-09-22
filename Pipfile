@@ -10,7 +10,6 @@ flask-cors = "*"
 openai = "*"
 pyjwt = "*"
 pylint = ">= 3.0.0a7" # Fix for annoying too-short snake_case variable length made it into alpha release. Have been waiting years for this https://github.com/pylint-dev/pylint/issues/2018#issuecomment-850122020.
-pylint-quotes = "*"
 python-dotenv = "*"
 flask-login = "*"
 
