@@ -14,3 +14,15 @@ jobs:
       - run: pipenv run test
       - run: pipenv run lint
       - run: scripts/lint
+  client_integrity_checks:
+    name: Client integrity checks
+    runs-on: ubuntu-latest
+    container: node:18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
+      - run: pnpm install
+      - run: pnpm run test:unit run
+      - run: pnpm run lint

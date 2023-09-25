@@ -35,15 +35,27 @@ vim .env
 
 Run `pipenv run cli secret-key` to generate a new secret key.
 
-Use the cli to run the app
+Use the cli to run the apps
 
 ```bash
 pipenv run cli serve
 ```
 
+In a new tab run the client app
+
+```bash
+pipenv run cli serve-frontend
+```
+
+Or run both at the same time
+
+```bash
+pipenv run cli serve-dev
+```
+
 Can reset words table with `pipenv run cli init-db`.
 
-Then visit http://localhost:5000/.
+Then visit http://localhost:5173/.
 
 ## Test
 

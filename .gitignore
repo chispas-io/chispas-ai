@@ -3,3 +3,5 @@
 .pytest_cache
 *.db
 .env
+node_modules
+dist
