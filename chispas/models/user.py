@@ -9,7 +9,7 @@ from ..constants.languages import (
     DEFAULT_LOCALE,
 )
 from ..utils.database import get_db_connection
-from ..utils.sessions import decode_token, encrypt_password, encrypt_authentication_token
+from ..utils.sessions import decode_token, encrypt_password, encrypt_authentication_token, create_user_token
 
 # https://flask-login.readthedocs.io/en/latest/_modules/flask_login/mixins/#UserMixin
 class User(UserMixin):
@@ -22,7 +22,9 @@ class User(UserMixin):
            'authentication_token': user_row[3],
            'locale': user_row[4],
            'base_language': user_row[5],
-           'learning_language': user_row[6]
+           'learning_language': user_row[6],
+           'admin': user_row[7],
+           'token': user_row[8],
        }
 
     @classmethod
@@ -72,7 +74,9 @@ class User(UserMixin):
             'authentication_token': authentication_token,
             'locale': DEFAULT_LOCALE,
             'base_language': DEFAULT_BASE_LANGUAGE,
-            'learning_language': DEFAULT_LEARNING_LANGUAGE
+            'learning_language': DEFAULT_LEARNING_LANGUAGE,
+            'admin': False,
+            'token': create_user_token(),
         }
 
         c.execute('''
@@ -82,14 +86,18 @@ class User(UserMixin):
             authentication_token,
             locale,
             base_language,
-            learning_language
+            learning_language,
+            admin,
+            token
         ) VALUES (
             :username,
             :encrypted_password,
             :authentication_token,
             :locale,
             :base_language,
-            :learning_language
+            :learning_language,
+            :admin,
+            :token
         )
         ''', initial_user_info)
 
@@ -115,10 +123,7 @@ class User(UserMixin):
         conn.close()
 
     @classmethod
-    def valid_login_request(cls, request):
-        username = request.form['username']
-        password = request.form['password']
-
+    def valid_login_request(cls, username, password):
         user = cls.query(username)
 
         if user is None:
@@ -141,10 +146,12 @@ class User(UserMixin):
             return False
 
     def __init__(self, user_info):
-        self.id = user_info['username']
+        self.id = user_info['token'] # TODO: use the UserMixin's id getter to dedupe this line
+        self.token = user_info['token']
         self.username = user_info['username']
         self.encrypted_password = user_info['encrypted_password']
         self.authentication_token = user_info['authentication_token']
+        self.admin = user_info['admin']
 
         self.locale = user_info['locale']
         self.base_language = user_info['base_language']

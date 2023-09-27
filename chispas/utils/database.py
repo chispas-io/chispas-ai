@@ -7,15 +7,18 @@ def initialize_database():
     # Create a cursor object to execute SQL queries
     c = conn.cursor()
 
+    # TODO: rearrange ordering when convenient for everyone
     # Create table for users
     c.execute('''CREATE TABLE IF NOT EXISTS users (
                     user_id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    username TEXT NOT NULL,
+                    username TEXT UNIQUE NOT NULL,
                     encrypted_password TEXT NOT NULL,
                     authentication_token TEXT,
                     locale TEXT,
                     base_language TEXT,
-                    learning_language TEXT
+                    learning_language TEXT,
+                    admin BOOLEAN NOT NULL,
+                    token TEXT UNIQUE NOT NULL
                 );''')
 
     # Create table for unknown words

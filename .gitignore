@@ -1,6 +1,7 @@
 .idea
 .vscode
 .pytest_cache
+.coverage
 *.db
 .env
 node_modules

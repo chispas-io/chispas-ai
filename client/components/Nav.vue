@@ -6,5 +6,6 @@
 </template>
 
 <script setup>
+// TODO: https://heroicons.com/
 import { RouterLink } from "vue-router";
 </script>

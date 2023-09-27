@@ -11,9 +11,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: scripts/setup
-      - run: pipenv run test
+      - run: pipenv run test --junitxml=pytest.xml | tee pytest-coverage.txt
       - run: pipenv run lint
       - run: scripts/lint
+      - name: Pytest coverage
+        uses: MishaKav/pytest-coverage-comment@main
+        with:
+          pytest-coverage-path: ./pytest-coverage.txt
+          junitxml-path: ./pytest.xml
   client_integrity_checks:
     name: Client integrity checks
     runs-on: ubuntu-latest
