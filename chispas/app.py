@@ -138,7 +138,6 @@ def create_app(): # pylint: disable=too-many-locals
 
     # curl -X POST -d "username=charlie&password=is_a_cat" http://localhost:5000/api/users/add
     @app.route('/api/users/add', methods=['POST'])
-    @login_required
     def add_user():
         username = request.form['username']
         password = request.form['password']
