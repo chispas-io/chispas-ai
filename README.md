@@ -4,6 +4,9 @@
 
 The Language Learning App aims to provide an interactive and adaptive learning experience for individuals looking to improve their language skills. Utilizing OpenAI's ChatGPT for linguistic analysis and tailored educational content, the application offers a multi-faceted approach to language learning.
 
+<img width="704" alt="image" src="https://github.com/chispas-io/chispas-ai/assets/23323466/2aea299a-9160-4587-b038-ce361db354b4">
+
+
 ## Core Features:
 
 - Random Text Blocks: The app will provide the user with a block of text in the language they are trying to learn.
