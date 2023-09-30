@@ -33,6 +33,13 @@ cp .env.example .env
 vim .env
 ```
 
+```
+rm -f language_learning_app.db
+pipenv run cli init-db
+pipenv run cli serve
+# open new tab
+curl -X POST -d "username=chispas&password=chispas" http://127.0.0.1:5000/api/users/add
+
 Run `pipenv run cli secret-key` to generate a new secret key.
 
 Use the cli to run the app
