@@ -103,7 +103,7 @@ def create_app(): # pylint: disable=too-many-locals
             difficult_words = request.form['difficult_words']
             store_unknown_words(current_user.id, difficult_words)
 
-        return jsonify(get_unknown_words(current_user.id))
+        return redirect(url_for('index'))
 
     @app.route('/api/lessons/difficult-words/themes', methods=['GET', 'POST'])
     @login_required
