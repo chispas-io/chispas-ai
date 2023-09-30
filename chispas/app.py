@@ -47,7 +47,7 @@ def create_app(): # pylint: disable=too-many-locals
 
         # Get the list of difficult words from the user
         initial_difficult_words = get_unknown_words(current_user.id)
-        difficult_words = ' '.join(initial_difficult_words)
+        difficult_words = ', '.join(initial_difficult_words)
 
         # Analyze the themes in the list of unknown words using ChatGPT
         themes = analyze_themes_with_chatgpt(

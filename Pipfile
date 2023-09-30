@@ -18,5 +18,5 @@ pytest = "*"
 
 [scripts]
 cli = "python -m cli"
-test = "python -m pytest"
+test = "python -m pytest -v"
 lint = "pylint chispas tests"

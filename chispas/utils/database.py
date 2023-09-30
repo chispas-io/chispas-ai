@@ -1,4 +1,5 @@
 import sqlite3
+from .text import split_text_segment
 
 def initialize_database():
     # Connect to SQLite database (it will create a file if it doesn't exist)
@@ -22,7 +23,7 @@ def initialize_database():
     c.execute('''CREATE TABLE IF NOT EXISTS unknown_words (
                     word_id INTEGER PRIMARY KEY AUTOINCREMENT,
                     user_id INTEGER,
-                    word TEXT NOT NULL,
+                    word TEXT NOT NULL UNIQUE,
                     FOREIGN KEY(user_id) REFERENCES users(user_id)
                 );''')
 
@@ -37,12 +38,9 @@ def store_unknown_words(user_id, unknown_words):
     # Create a cursor object to execute SQL queries
     c = conn.cursor()
 
-    # Split by comma and strip the leading and trailing spaces and double quotes
-    split_words_and_phrases = [word.strip().strip('"') for word in unknown_words.split(',')]
-
     # Store the unknown words in the database
-    for word in split_words_and_phrases:
-        c.execute('INSERT INTO unknown_words (user_id, word) VALUES (?, ?)', (user_id, word))
+    for word in split_text_segment(unknown_words):
+        c.execute('INSERT OR IGNORE INTO unknown_words (user_id, word) VALUES (?, ?)', (user_id, word))
 
     # Commit the changes and close the connection
     conn.commit()
