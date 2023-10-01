@@ -190,7 +190,7 @@ def create_app(): # pylint: disable=too-many-locals
 
     @app.route('/javascripts/<path:path>')
     def send_js(path):
-        return send_from_directory('javascripts', path)
+        return send_from_directory('javascripts/dist', path)
 
     @app.route('/images/<path:path>')
     def send_img(path):

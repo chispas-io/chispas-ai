@@ -3,3 +3,7 @@
 .pytest_cache
 *.db
 .env
+
+# Javascripts
+chispas/javascripts/dist
+node_modules/
