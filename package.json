@@ -1,0 +1,27 @@
+{
+  "name": "chispas-ai",
+  "version": "1.0.0",
+  "description": "## Overview",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node ./scripts/js/build",
+    "watch": "node ./scripts/js/watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chispas-io/chispas-ai.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chispas-io/chispas-ai/issues"
+  },
+  "homepage": "https://github.com/chispas-io/chispas-ai#readme",
+  "devDependencies": {
+    "esbuild": "0.19.4"
+  }
+}
