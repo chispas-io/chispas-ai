@@ -2,6 +2,8 @@ from logging import info
 from flask import Flask
 from flask_cors import CORS
 from flask_login import LoginManager
+from .api import account_api, assets_api, base_api, languages_api, lessons_api, users_api
+from .models.user import User
 from .utils.sessions import find_or_create_secret_key
 
 def initialize_app():
@@ -14,5 +16,24 @@ def initialize_app():
 def initialize_login_manager(app):
     login_manager = LoginManager()
     login_manager.init_app(app)
-    login_manager.login_view = 'login'
+
+    @login_manager.user_loader
+    def user_loader(username):
+        return User.query(username)
+
+    # https://flask-login.readthedocs.io/en/latest/#custom-login-using-request-loader
+    @login_manager.request_loader
+    def request_loader(rqst):
+        username = rqst.form.get('username')
+        return User.query(username)
+
     return login_manager
+
+def initialize_api(app):
+    app.register_blueprint(base_api)
+    app.register_blueprint(assets_api)
+
+    app.register_blueprint(account_api, url_prefix='/api/account')
+    app.register_blueprint(languages_api, url_prefix='/api/languages')
+    app.register_blueprint(lessons_api, url_prefix='/api/lessons')
+    app.register_blueprint(users_api, url_prefix='/api/users')

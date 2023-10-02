@@ -1,6 +1,6 @@
 import os
+from multiprocessing import Process, Event
 import click
-
 from chispas.utils.database import initialize_database, erase_unknown_words_table
 from chispas.utils.sessions import generate_secret_key
 
@@ -28,6 +28,32 @@ def secret_key():
 
 @cli.command()
 def serve():
-    """Run the app."""
+    """Run the Flask app."""
 
     os.system('flask --app chispas run --debug')
+
+@cli.command('serve-frontend')
+def serve_frontend():
+    """Run the frontend app."""
+
+@cli.command('serve-dev')
+def serve_dev():
+    """Run both the Flask and Vue apps at the same time."""
+
+    e = Event()
+
+    p1 = Process(target=task_1, args=(e,))
+    p1.start()
+
+    p2 = Process(target=task_2, args=(e,))
+    p2.start()
+
+    e.set()
+
+def task_1(event):
+    event.wait()
+    os.system('pipenv run cli serve')
+
+def task_2(event):
+    event.wait()
+    os.system('pipenv run cli serve-frontend')
