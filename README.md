@@ -4,8 +4,7 @@
 
 The Language Learning App aims to provide an interactive and adaptive learning experience for individuals looking to improve their language skills. Utilizing OpenAI's ChatGPT for linguistic analysis and tailored educational content, the application offers a multi-faceted approach to language learning.
 
-<img width="1134" alt="image" src="https://github.com/chispas-io/chispas-ai/assets/23323466/c401521d-713a-4b07-9069-6149efeee248">
-
+![Flow diagram](https://github.com/chispas-io/chispas-ai/assets/23323466/c401521d-713a-4b07-9069-6149efeee248)
 
 ## Core Features:
 
@@ -36,16 +35,17 @@ cp .env.example .env
 vim .env
 ```
 
-```
+```bash
 rm -f language_learning_app.db
 pipenv run cli init-db
 pipenv run cli serve
 # open new tab
 curl -X POST -d "username=chispas&password=chispas" http://127.0.0.1:5000/api/users/add
+```
 
 Run `pipenv run cli secret-key` to generate a new secret key.
 
-Use the cli to run the app
+Use the cli to run the apps.
 
 ```bash
 pipenv run cli serve

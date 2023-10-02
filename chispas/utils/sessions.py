@@ -73,4 +73,7 @@ def encrypt_password(password) -> str:
     return encode_token(password, days=365)
 
 def encrypt_authentication_token() -> str:
-    return encode_token(create_secret_key(), days=30)
+    return encode_token(token_urlsafe(8), days=30)
+
+def create_user_token() -> str:
+    return token_urlsafe(8)

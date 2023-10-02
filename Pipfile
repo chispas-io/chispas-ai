@@ -7,16 +7,17 @@ name = "pypi"
 click = "*"
 flask = "*"
 flask-cors = "*"
+flask-login = "*"
 openai = "*"
 pyjwt = "*"
 pylint = ">= 3.0.0a7" # Fix for annoying too-short snake_case variable length made it into alpha release. Have been waiting years for this https://github.com/pylint-dev/pylint/issues/2018#issuecomment-850122020.
 python-dotenv = "*"
-flask-login = "*"
 
 [dev-packages]
 pytest = "*"
+pytest_cov = "*"
 
 [scripts]
 cli = "python -m cli"
-test = "python -m pytest -v"
+test = "python -m pytest -v --cov=chispas --cov-report=term-missing:skip-covered"
 lint = "pylint chispas tests"
