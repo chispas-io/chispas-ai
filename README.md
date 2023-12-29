@@ -20,7 +20,7 @@ This process will then, theoretically, be applied recursively to progressively t
 
 ## Setup
 
-Setup env
+Setup your env.
 
 ```bash
 scripts/setup
@@ -35,19 +35,19 @@ vim .env
 
 Run `pipenv run cli secret-key` to generate a new secret key.
 
-Use the cli to run the apps
+Use the cli to run the apps.
 
 ```bash
 pipenv run cli serve
 ```
 
-In a new tab run the client app
+In a new tab run the client app.
 
 ```bash
 pipenv run cli serve-frontend
 ```
 
-Or run both at the same time
+Or run both at the same time.
 
 ```bash
 pipenv run cli serve-dev

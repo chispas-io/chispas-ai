@@ -16,7 +16,7 @@
 
         <div>
           <div class="flex items-center justify-between">
-            <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
+            <label for="password" class="mr-1 block text-sm font-medium leading-6 text-gray-900">Password</label>
             <div class="text-sm">
               <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-500">Forgot password?</a>
             </div>
@@ -27,7 +27,10 @@
         </div>
 
         <div>
-          <label for="remember_me"><input name="remember_me" id="remember_me" type="checkbox">Remember me</label>
+          <label for="remember_me">
+            <input name="remember_me" id="remember_me" type="checkbox" class="mr-1">
+            Remember me
+          </label>
         </div>
 
         <div>

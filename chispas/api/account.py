@@ -10,9 +10,11 @@ account_api = Blueprint('account', __name__)
 
 @account_api.route('/authenticate', methods=['POST'])
 def authenticate():
-    payload = request.get_json()
-    username = payload['username']
-    password = payload['password']
+    # payload = request.get_json()
+    # username = payload['username']
+    # password = payload['password']
+    username = request.form['username']
+    password = request.form['password']
     user = User.valid_login_request(username, password)
     if user:
         return jsonify({ 'authentication_token': user.authentication_token })
